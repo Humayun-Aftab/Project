@@ -1,0 +1,43 @@
+{
+    "daily_report": [
+      { "day": "2025-01-01", "income": 5000, "expense": 3000 },
+      { "day": "2025-01-02", "income": 4000, "expense": 2500 },
+      { "day": "2025-01-03", "income": 4500, "expense": 3500 }
+    ],
+    "weekly_report": [
+      { "week": 1, "year": 2025, "income": 18000, "expense": 12000 },
+      { "week": 2, "year": 2025, "income": 22000, "expense": 15000 }
+    ],
+    "monthly_report": [
+      { "month": "January", "income": 40000, "expense": 28000 },
+      { "month": "February", "income": 38000, "expense": 25000 }
+    ],
+    "quarterly_report": [
+      { "quarter": "Q1", "income": 118000, "expense": 75000 },
+      { "quarter": "Q2", "income": 125000, "expense": 80000 }
+    ],
+    "yearly_report": [
+      { "year": 2024, "income": 450000, "expense": 320000 },
+      { "year": 2025, "income": 480000, "expense": 350000 }
+    ],
+    "categories": [
+      { "label": "Food", "value": 12000 },
+      { "label": "Transport", "value": 8000 },
+      { "label": "Entertainment", "value": 10000 },
+      { "label": "Healthcare", "value": 6000 },
+      { "label": "Others", "value": 4000 }
+    ],
+    "active_projects": [
+      { "status": "active", "total_budget": 50000 },
+      { "status": "completed", "total_budget": 30000 },
+      { "status": "inactive", "total_budget": 15000 }
+    ],
+    "financial_growth": [
+      { "month": "January", "growth": 12000 },
+      { "month": "February", "growth": 14000 },
+      { "month": "March", "growth": 16000 },
+      { "month": "April", "growth": 18000 },
+      { "month": "May", "growth": 20000 }
+    ],
+    "total_investment": 120000
+  }

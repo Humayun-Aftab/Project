@@ -1,0 +1,164 @@
+{
+  "projects": [
+    {
+      "project_id": 45,
+      "employee_id": 7,
+      "project_name": "Project Epsilon",
+      "project_budget": 25000.00,
+      "start_date": null,
+      "end_date": "2025-01-10",
+      "notes": "Project to launch a new product line",
+      "status": "completed"
+    },
+    {
+      "project_id": 47,
+      "employee_id": 11,
+      "project_name": "Project Eta",
+      "project_budget": 16000.00,
+      "start_date": null,
+      "end_date": "2025-01-07",
+      "notes": "A project for employee training and development",
+      "status": "inactive"
+    },
+    {
+      "project_id": 48,
+      "employee_id": 12,
+      "project_name": "Project Theta",
+      "project_budget": 14000.00,
+      "start_date": null,
+      "end_date": null,
+      "notes": "Project to implement a new CRM system",
+      "status": "completed"
+    },
+    {
+      "project_id": 49,
+      "employee_id": 13,
+      "project_name": "Project Iota",
+      "project_budget": 22000.00,
+      "start_date": null,
+      "end_date": null,
+      "notes": "Project to automate business operations",
+      "status": "completed"
+    },
+    {
+      "project_id": 50,
+      "employee_id": 14,
+      "project_name": "Project Kappa",
+      "project_budget": 30000.00,
+      "start_date": null,
+      "end_date": null,
+      "notes": "A project focused on international expansion",
+      "status": "active"
+    },
+    {
+      "project_id": 55,
+      "employee_id": null,
+      "project_name": "Marketing Campaign",
+      "project_budget": 20000.00,
+      "start_date": "2025-02-01",
+      "end_date": null,
+      "notes": "Launch a marketing campaign for the new product.",
+      "status": "completed"
+    },
+    {
+      "project_id": 56,
+      "employee_id": null,
+      "project_name": "Cloud Migration",
+      "project_budget": 30000.00,
+      "start_date": "2025-03-10",
+      "end_date": null,
+      "notes": "Migrate infrastructure to the cloud for scalability.",
+      "status": "inactive"
+    },
+    {
+      "project_id": 57,
+      "employee_id": null,
+      "project_name": "Website Redesign",
+      "project_budget": 15000.00,
+      "start_date": "2025-01-15",
+      "end_date": null,
+      "notes": "Redesign the company website for better UX.",
+      "status": "active"
+    },
+    {
+      "project_id": 45,
+      "employee_id": 7,
+      "project_name": "Project Epsilon",
+      "project_budget": 25000.00,
+      "start_date": null,
+      "end_date": "2025-01-10",
+      "notes": "Project to launch a new product line",
+      "status": "completed"
+    },
+    {
+      "project_id": 47,
+      "employee_id": 11,
+      "project_name": "Project Eta",
+      "project_budget": 16000.00,
+      "start_date": null,
+      "end_date": "2025-01-07",
+      "notes": "A project for employee training and development",
+      "status": "inactive"
+    },
+    {
+      "project_id": 48,
+      "employee_id": 12,
+      "project_name": "Project Theta",
+      "project_budget": 14000.00,
+      "start_date": null,
+      "end_date": null,
+      "notes": "Project to implement a new CRM system",
+      "status": "completed"
+    },
+    {
+      "project_id": 49,
+      "employee_id": 13,
+      "project_name": "Project Iota",
+      "project_budget": 22000.00,
+      "start_date": null,
+      "end_date": null,
+      "notes": "Project to automate business operations",
+      "status": "completed"
+    },
+    {
+      "project_id": 50,
+      "employee_id": 14,
+      "project_name": "Project Kappa",
+      "project_budget": 30000.00,
+      "start_date": null,
+      "end_date": null,
+      "notes": "A project focused on international expansion",
+      "status": "active"
+    },
+    {
+      "project_id": 55,
+      "employee_id": null,
+      "project_name": "Marketing Campaign",
+      "project_budget": 20000.00,
+      "start_date": "2025-02-01",
+      "end_date": null,
+      "notes": "Launch a marketing campaign for the new product.",
+      "status": "completed"
+    },
+    {
+      "project_id": 56,
+      "employee_id": null,
+      "project_name": "Cloud Migration",
+      "project_budget": 30000.00,
+      "start_date": "2025-03-10",
+      "end_date": null,
+      "notes": "Migrate infrastructure to the cloud for scalability.",
+      "status": "inactive"
+    },
+    {
+      "project_id": 57,
+      "employee_id": null,
+      "project_name": "Website Redesign",
+      "project_budget": 15000.00,
+      "start_date": "2025-01-15",
+      "end_date": null,
+      "notes": "Redesign the company website for better UX.",
+      "status": "active"
+    }
+  ]
+}

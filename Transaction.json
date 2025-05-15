@@ -1,0 +1,100 @@
+{
+  "transactions": [
+    {
+      "transaction_id": 240,
+      "transaction_amount": 200.00,
+      "transaction_type": "income",
+      "transaction_date": "2025-01-10",
+      "notes": "Course fee",
+      "transaction_category": "Credit Card"
+    },
+    {
+      "transaction_id": 241,
+      "transaction_amount": 50.75,
+      "transaction_type": "expense",
+      "transaction_date": "2025-01-01",
+      "notes": "Weekly grocery shopping",
+      "transaction_category": "Credit Card"
+    },
+    {
+      "transaction_id": 243,
+      "transaction_amount": 100.00,
+      "transaction_type": "expense",
+      "transaction_date": "2025-01-03",
+      "notes": "Electricity bill payment",
+      "transaction_category": "PayPal"
+    },
+    {
+      "transaction_id": 245,
+      "transaction_amount": 20.00,
+      "transaction_type": "expense",
+      "transaction_date": "2025-01-02",
+      "notes": "Movie tickets",
+      "transaction_category": "Debit Card"
+    },
+    {
+      "transaction_id": 248,
+      "transaction_amount": 25.00,
+      "transaction_type": "expense",
+      "transaction_date": "2025-01-02",
+      "notes": "Bus fare",
+      "transaction_category": "Cash"
+    },
+    {
+      "transaction_id": 250,
+      "transaction_amount": 15.00,
+      "transaction_type": "expense",
+      "transaction_date": "2025-01-04",
+      "notes": "Movie ticket",
+      "transaction_category": "Credit Card"
+    },
+    {
+      "transaction_id": 240,
+      "transaction_amount": 200.00,
+      "transaction_type": "income",
+      "transaction_date": "2025-01-10",
+      "notes": "Course fee",
+      "transaction_category": "Credit Card"
+    },
+    {
+      "transaction_id": 241,
+      "transaction_amount": 50.75,
+      "transaction_type": "expense",
+      "transaction_date": "2025-01-01",
+      "notes": "Weekly grocery shopping",
+      "transaction_category": "Credit Card"
+    },
+    {
+      "transaction_id": 243,
+      "transaction_amount": 100.00,
+      "transaction_type": "expense",
+      "transaction_date": "2025-01-03",
+      "notes": "Electricity bill payment",
+      "transaction_category": "PayPal"
+    },
+    {
+      "transaction_id": 245,
+      "transaction_amount": 20.00,
+      "transaction_type": "expense",
+      "transaction_date": "2025-01-02",
+      "notes": "Movie tickets",
+      "transaction_category": "Debit Card"
+    },
+    {
+      "transaction_id": 248,
+      "transaction_amount": 25.00,
+      "transaction_type": "expense",
+      "transaction_date": "2025-01-02",
+      "notes": "Bus fare",
+      "transaction_category": "Cash"
+    },
+    {
+      "transaction_id": 250,
+      "transaction_amount": 15.00,
+      "transaction_type": "expense",
+      "transaction_date": "2025-01-04",
+      "notes": "Movie ticket",
+      "transaction_category": "Credit Card"
+    }
+  ]
+}

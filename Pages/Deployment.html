@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="/FinanceManagementPortal/" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deployment/Projects</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header id="header" class="header--wrapper"></header>
+    <nav id="navbar">
+      <ul>
+        <li>
+          <button id="close-sidebar-button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="40px"
+              viewBox="0 -960 960 960"
+              width="40px"
+              fill="#c9c9c9"
+            >
+              <path
+                d="m480-444.62-209.69 209.7q-7.23 7.23-17.5 7.42-10.27.19-17.89-7.42-7.61-7.62-7.61-17.7 0-10.07 7.61-17.69L444.62-480l-209.7-209.69q-7.23-7.23-7.42-17.5-.19-10.27 7.42-17.89 7.62-7.61 17.7-7.61 10.07 0 17.69 7.61L480-515.38l209.69-209.7q7.23-7.23 17.5-7.42 10.27-.19 17.89 7.42 7.61 7.62 7.61 17.7 0 10.07-7.61 17.69L515.38-480l209.7 209.69q7.23 7.23 7.42 17.5.19 10.27-7.42 17.89-7.62 7.61-17.7 7.61-10.07 0-17.69-7.61L480-444.62Z"
+              />
+            </svg>
+          </button>
+        </li>
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="Pages/Deployment.html">Deployment</a></li>
+        <li><a href="Pages/Transaction.html">Transaction</a></li>
+      </ul>
+    </nav>
+
+    <section class="container">
+      <aside id="sidebar" class="sidebar"></aside>
+      <main class="main-content">
+        <div id="messageBox" class="alert" style="display: none"></div>
+        <span class="header">Deployments/Projects</span>
+        <section>
+          <div
+            style="width: 100%; display: flex; justify-content: space-between"
+            class="quick-actions"
+          >
+            <form class="form-group">
+              <label for="bulk-upload">Bulk Upload (CSV)</label>
+              <input
+                style="display: block"
+                type="file"
+                id="bulk-upload"
+                accept=".csv"
+              />
+              <div style="margin-top: 1rem">
+                <button class="btn" id="upload-button">
+                  <i class="fa-solid fa-upload"></i> Upload Deployments
+                </button>
+              </div>
+            </form>
+            <div class="">
+              <button class="btn add-transaction" id="addTransactionBtn">
+                <i class="fa fa-plus"></i> Add Project
+              </button>
+            </div>
+          </div>
+
+          <div class="overlay" id="overlay"></div>
+          <div style="z-index: 999" class="modal" id="addTransactionModal">
+            <!--<div class="modal-content">-->
+            <h3>Add New Project</h3>
+            <form method="post" id="transactionForm" class="form-row">
+              <label for="projectDate">Select a data:</label>
+              <input type="Date" id="projectDate" name="projectDate" />
+
+              <label for="projectName">Project Name</label>
+              <input id="projectName" name="projectName" />
+
+              <label for="projectBudget">Project Budget</label>
+              <input
+                type="number"
+                id="projectBudget"
+                name="projectBudget"
+                required
+              />
+
+              <label for="projectNotes">Notes</label>
+              <input id="projectNotes" name="projectNotes" />
+              <button
+                id="submitForm"
+                type="submit"
+                class="btn submit"
+                name="submit"
+              >
+                Add
+              </button>
+            </form>
+
+            <!--</div>-->
+          </div>
+        </section>
+
+        <div class="filters">
+          <form method="GET" action="">
+            <input
+              type="text"
+              name="search"
+              placeholder="Search by description or category"
+              value=""
+            />
+            <input type="date" name="start-date" value="" />
+            <input type="date" name="end-date" value="" />
+            <div>
+              <button id="searchButton" type="submit">Search</button>
+              <button
+                style="font-size: 14px"
+                href="Deployment.html"
+                id="removeFiltersButton"
+                type="button"
+              >
+                Remove
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div class="exportDatasFile">
+          <button class="btn" onclick="exportData('pdf')">
+            <i class="fa-solid fa-file-export"></i> Export as PDF
+          </button>
+          <button class="btn" onclick="exportData('excel')">
+            <i class="fa-solid fa-file-export"></i> Export as Excel
+          </button>
+        </div>
+
+        <section class="Transaction">
+          <table
+            id="transactionTable"
+            class="transaction-table"
+            border="1"
+            style="width: 100%; border-collapse: collapse"
+          >
+            <thead>
+              <tr>
+                <th>Project ID</th>
+                <th>Project Name</th>
+                <th>Budget</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Notes</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="projects-table-body"></tbody>
+          </table>
+        </section>
+      </main>
+    </section>
+    <script src="Pages/Deployment.js"></script>
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  </body>
+</html>
