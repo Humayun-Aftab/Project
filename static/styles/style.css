@@ -38,8 +38,11 @@
 
 body {
  background : var(--switch-color);
- display: flex;
  width: 100%;
+}
+
+.main-wrapper {
+  display: flex;;
 }
 
 .toast {
@@ -86,7 +89,8 @@ button, form a{
   padding: 0.7rem;
 } */
 
-.header--wrapper {
+#header {
+  width: 100%;
   display: flex;
   padding: 0.2rem 2%;
   justify-content: space-between;
@@ -484,7 +488,6 @@ border: 1px solid var(--base-color);
 
 .main-content{
   flex: 1;
-  margin-left: 150px;
   padding: 1rem;
   box-sizing: border-box;
   overflow-y: auto;
