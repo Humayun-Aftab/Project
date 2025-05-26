@@ -1,0 +1,6 @@
+1 - install python : https://www.python.org/downloads/
+2 - run : py -m venv .venv
+3 - run : ./venv/scripts/activate
+4 - run : pip install -r requirements.txt
+5 - run : flask run --debug (debug if you want restart on change, 
+    still requires refresh in browser)

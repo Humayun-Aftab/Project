@@ -5,25 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="./style login.css">
+    <link rel="stylesheet" href="/static/styles/login_style.css">
 </head>
 <body>
     <div class="container" id="signup">
         <h1 class="form-title">Sign Up</h1>
-        <form>
+        <form action="/signup" method="post">
           <div class="input-group">
              <i class="fas fa-user"></i>
-             <input type="text" name="firstName" id="firstName" placeholder="First Name" >
+             <input type="text" name="firstname" id="firstName" placeholder="First Name" >
              <label for="firstname">First Name</label>
           </div>
           <div class="input-group">
               <i class="fas fa-user"></i>
-              <input type="text" name="lastName" id="lastName" placeholder="Last Name" >
+              <input type="text" name="lastname" id="lastName" placeholder="Last Name" >
               <label for="lastName">Last Name</label>
           </div>
           <div class="input-group">
               <i class="fas fa-envelope"></i>
-              <input type="email" name="email" id="email" placeholder="Email" >
+              <input type="email" name="username" id="email" placeholder="Email" >
               <label for="email">Email</label>
           </div>
           <div class="input-group">
@@ -32,11 +32,11 @@
               <label for="password">Password</label>
           </div>
           
-         <input type="submit" class="btn" value="Sign Up" name="signUp">
+         <input type="submit" class="btn">
         </form>
         <div class="links">
           <p>Already Have Account ?</p>
-            <a href="./login.html"> 
+            <a href="/login"> 
                 <button id="signInButton">Sign In</button>
             </a>
         </div>

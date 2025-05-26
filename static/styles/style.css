@@ -882,10 +882,6 @@ td, th {
     list-style: none;
   }
 
-  #messageBox {
-    display: none;
-  }
-
   .alerts-container {
     margin-left: 0;
     width: 100%;
@@ -947,4 +943,18 @@ form input, form button, form a {
   margin-bottom: 1rem;
 }
 
+}
+
+
+#messageBox {
+  min-width: 50%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  padding: 8px;
+  text-align: center;
+  position: fixed;
+  border-radius: 8px;
+  background-color: #33cf33;
+  border: 2px solid rgb(69, 69, 69);
+  display: none;
 }

@@ -193,12 +193,12 @@
               <table>
                 <thead>
                   <tr>
-                    <th>Date</th>
+                    <th>Transaction ID</th>
                     <th>Amount</th>
-                    <th>Category</th>
-                    <th>Types</th>
+                    <th>Type</th>
+                    <th>Date</th>
                     <th>Notes</th>
-                    <th>Example</th>
+                    <th>Category</th>
                   </tr>
                 </thead>
                 <tbody id="transactions-table-body"></tbody>
@@ -246,23 +246,6 @@
             <h1 style="text-align: center">Financial Growth</h1>
             <canvas id="growthChart" width="400" height="200"></canvas>
           </section>
-          <section class="tabular--wrapper">
-            <div class="active-projects-section">
-              <h1 style="text-align: center">
-                Cumulative Budget by Project Status
-              </h1>
-              <div style="display: flex">
-                <div style="width: 100%">
-                  <canvas
-                    id="statusBudgetChart"
-                    width="400"
-                    height="200"
-                  ></canvas>
-                </div>
-                <div class="projects-grid" id="projectsGrid"></div>
-              </div>
-            </div>
-          </section>
           <!-- </section> -->
         </main>
       </section>
@@ -273,7 +256,7 @@
       <!-- <script src="/Pages/Transaction.js"></script> -->
       <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
       <script src="/static/js/Chart.js"></script>
-      <script src="/static/js/script.js"></script>
+      <script src="/static/js/script.js" type="module"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
       <script src="/static/js/loader.js"></script> 
   </body>

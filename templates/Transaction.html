@@ -15,6 +15,8 @@
   <body>
     <header class="header--wrapper"></header>
 
+    <div id="messageBox"></div>
+
     <div class="main-wrapper">
       <nav id="navbar" class="sidebar">
         <ul>
@@ -40,7 +42,7 @@
               style="width: 100%; display: flex; justify-content: space-between"
               class="quick-actions"
             >
-              <form class="form-group">
+              <!-- <form class="form-group">
                 <label for="bulk-upload">Bulk Upload (CSV)</label>
                 <input
                   style="display: block"
@@ -53,19 +55,88 @@
                     <i class="fa-solid fa-upload"></i>Upload Transactions
                   </button>
                 </div>
-              </form>
+              </form> -->
               <div class="">
                 <button class="btn add-transaction" id="addTransactionBtn">
                   <i class="fa fa-plus"></i> Add Transaction
                 </button>
               </div>
+              <div class="">
+                <button class="btn add-transaction" id="deleteTransactionBtn">
+                  <i class="fa fa-plus"></i> Remove Transaction
+                </button>
+              </div>
+              <div class="">
+                <button class="btn add-transaction" id="updateTransactionBtn">
+                  <i class="fa fa-plus"></i> Update Transaction
+                </button>
+              </div>
             </div>
 
             <div class="overlay" id="overlay"></div>
+
+
+            <!-- Update Transaction Form -->
+            <div style="z-index: 999" class="modal" id="updateTransactionModal">
+              <h1>Update Transaction</h1>
+              <form method="patch" action="/api/transaction" id="updateTransactionForm" class="form-row">
+                <label for="Date">Select an existing id:</label>
+                <input type="text" id="id" name="id" />
+
+                <button type="button" id="fillTransaction">Fill the fields</button> 
+
+                <label for="Date">Select a data:</label>
+                <input type="date" id="date" name="date" />
+
+                <label for="method">Transaction Type</label>
+                <select
+                  style="border: 1px solid; padding: 5px"
+                  type="text"
+                  id="type"
+                  name="type"
+                >
+                  <option value="income">Income</option>
+                  <option value="expense">Expense</option>
+                  <option value="investment">Investment</option>
+                </select>
+
+                <label for="amount">Amount</label>
+                <input type="number" id="amount" name="amount" />
+
+                <label for="method">Category</label>
+                <select
+                  style="border: 1px solid; padding: 5px"
+                  type="text"
+                  id="method"
+                  name="category"
+                >
+                  <option value="healthcare">Healthcare</option>
+                  <option value="food">Food</option>
+                  <option value="transport">Transport</option>
+                  <option value="entertainment">Entertainment</option>
+                  <option value="other">Other</option>
+                </select>
+
+                <label for="notes">Notes</label>
+                <input id="notes" name="notes" />
+                <button
+                  id="submitForm"
+                  type="submit"
+                  class="btn submit"
+                  name="submit"
+                >
+                  Update
+                </button>
+              </form>
+            </div>
+
+
+            <!-- Add Transaction Form -->
             <div style="z-index: 999" class="modal" id="addTransactionModal">
               <!--<div class="modal-content">-->
               <h3>Add New Transaction</h3>
-              <form method="post" id="transactionForm" class="form-row">
+              
+              <form method="post" action="/api/transaction" id="transactionForm" class="form-row">
                 <label for="Date">Select a data:</label>
                 <input type="date" id="date" name="date" />
 
@@ -85,17 +156,19 @@
                 <label for="amount">Amount</label>
                 <input type="number" id="amount" name="amount" required />
 
-                <label for="method">Payment Method</label>
+                <label for="method">Category</label>
                 <select
                   style="border: 1px solid; padding: 5px"
                   type="text"
                   id="method"
-                  name="method"
+                  name="category"
                   required
                 >
-                  <option value="credit">Credit Card</option>
-                  <option value="cash">Cash</option>
-                  <option value="online">Online Transaction</option>
+                  <option value="healthcare">Healthcare</option>
+                  <option value="food">Food</option>
+                  <option value="transport">Transport</option>
+                  <option value="entertainment">Entertainment</option>
+                  <option value="other">Other</option>
                 </select>
 
                 <label for="notes">Notes</label>
@@ -109,15 +182,25 @@
                   Add
                 </button>
               </form>
-
               <!--</div>-->
+            </div>
+
+            <!-- Delete Transaction Form -->
+            <div style="z-index: 999" class="modal" id="deleteTransactionModal">
+              <h1>Delete Transaction</h1>
+              <form method="delete" action="/api/transaction" id="deleteTransactionForm" class="form-row">
+                <label for="deleteId">Enter id to delete:</label>
+                <input name="id" type="text">
+
+                <button>Delete</button>
+              </form>
             </div>
           </section>
 
           <div style="display: flex; gap: 1rem; margin: 1rem 0%">
             <div>
               <div class="filters">
-                <form method="GET" action="">
+                <form method="GET" action="/api/transaction" id="searchForm">
                   <input
                     type="text"
                     name="search"
@@ -128,14 +211,6 @@
                   <input type="date" name="end-date" value="" />
                   <div>
                     <button id="searchButton" type="submit">Search</button>
-                    <button
-                      style="font-size: 14px"
-                      href="Deployment.html"
-                      id="removeFiltersButton"
-                      type="button"
-                    >
-                      Remove
-                    </button>
                   </div>
                 </form>
               </div>
@@ -175,10 +250,10 @@
       </section>
     </div>
 
-    <script src="/static/js/Transaction.js"></script>
+    <script src="/static/js/Transaction.js" type="module"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-    <script src="/static/js/script.js"></script>
+    <script src="/static/js/script.js" type="module"></script>
   </body>
 </html>

@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>sign In</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="./style login.css">
+    <link rel="stylesheet" href="/static/styles/login_style.css">
 </head>
 <body>
 
     <div class="container" id="signIn">
         <h1 class="form-title">Sign In</h1>
-        <form>
+        <form action="/login" method="post">
           <div class="input-group">
               <i class="fas fa-envelope"></i>
-              <input type="email" name="email" id="email" placeholder="Email">
+              <input type="email" name="username" id="email" placeholder="Email">
               <label for="email">Email</label>
           </div>
           <div class="input-group">
@@ -25,7 +25,7 @@
           <p class="recover">
             <a href="#">Forget Password</a>
           </p>
-         <input type="submit" class="btn" value="Sign In" name="signIn" >
+         <input type="submit" class="btn">
         </form>
         <div class="links">
           <p>Don't have account yet?</p>
@@ -36,7 +36,6 @@
           </a>
         </div>
       </div>
-      <script src="script.js"></script>
 </body>
 </html>
       

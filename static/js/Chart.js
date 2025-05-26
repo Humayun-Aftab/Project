@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://swadeshchhetri.github.io/FinanceManagementPortal/fetch_database.json"
+          "/api/report"
         );
         if (!response.ok) throw new Error("Failed to fetch data");
         return await response.json();
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   
       switch (period) {
         case "daily":
-          labels = data.daily_report.map((item) => item.day);
+          labels = data.daily_report.map((item) => item.date);
           incomeData = data.daily_report.map((item) => item.income);
           expenseData = data.daily_report.map((item) => item.expense);
           break;
@@ -180,78 +180,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       },
     });
   
-    // Chart 4: Active Project Status
-    const ctx4 = document.getElementById("statusBudgetChart").getContext("2d");
-  
-    const activeProjectsBudget =
-      data.active_projects.find((item) => item.status === "active")
-        ?.total_budget || 0;
-    const completedProjectsBudget =
-      data.active_projects.find((item) => item.status === "completed")
-        ?.total_budget || 0;
-    const onHoldProjectsBudget =
-      data.active_projects.find((item) => item.status === "inactive")
-        ?.total_budget || 0;
-  
-    const activeBudget = parseFloat(activeProjectsBudget);
-    const completedBudget = parseFloat(completedProjectsBudget);
-    const onHoldBudget = parseFloat(onHoldProjectsBudget);
-  
-    const groupedBarChart = new Chart(ctx4, {
-      type: "bar",
-      data: {
-        labels: ["Budget Allocation"],
-        datasets: [
-          {
-            label: "Active",
-            data: [activeBudget],
-            backgroundColor: "rgba(75, 73, 172, 0.8)",
-            borderColor: "rgba(75, 73, 172, 1)",
-            borderWidth: 1,
-          },
-          {
-            label: "Completed",
-            data: [completedBudget],
-            backgroundColor: "rgba(114, 96, 228, 0.8)",
-            borderColor: "rgba(114, 96, 228, 1)",
-            borderWidth: 1,
-          },
-          {
-            label: "In-Active",
-            data: [onHoldBudget],
-            backgroundColor: "rgba(192, 116, 248, 0.8)",
-            borderColor: "rgba(192, 116, 248, 1)",
-            borderWidth: 1,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: "top",
-          },
-          tooltip: {
-            mode: "index",
-            intersect: false,
-          },
-        },
-        scales: {
-          x: {
-            beginAtZero: true,
-          },
-          y: {
-            beginAtZero: true,
-          },
-        },
-      },
-    });
-  
-    // Chart 5: Financial Growth Area Chart
+    // Chart 4: Financial Growth Area Chart
     const ctx5 = document.getElementById("growthChart").getContext("2d");
-  
-    const growthlabels = data.financial_growth.map((item) => item.month);
-    const growthvalues = data.financial_growth.map((item) =>
+    const growthlabels = data.monthly_report.map((item) => item.month);
+    const growthvalues = data.monthly_report.map((item) =>
       parseFloat(item.growth)
     );
   
