@@ -481,7 +481,7 @@ border: 1px solid var(--base-color);
   box-sizing: border-box;
   overflow-y: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: minmax(auto, 1fr) minmax(auto, 1fr);
   gap: 20px;
   background: var(--background-color);
 }

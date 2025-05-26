@@ -1,37 +1,38 @@
-from sqlalchemy import create_engine, MetaData, Table, Column, \
-    PrimaryKeyConstraint, ForeignKeyConstraint, ForeignKey, \
-    Integer, String, Boolean, \
-    Select, Update, Delete
+from sqlalchemy import create_engine, text
 from sqlalchemy.dialects.sqlite import DATE
 
 engine = create_engine("sqlite+pysqlite:///database.db")
 
-metadata = MetaData()
 
-users = Table(
-    "users", 
-    metadata,
-    Column("id", Integer, primary_key=True),
-    Column("username", String, unique=True),
-    Column("password", String),
-    Column("firstname", String),
-    Column("lastname", String),
-)
+users = text('''
+    CREATE TABLE users (
+        id INTEGER NOT NULL,
+        username VARCHAR,
+        password VARCHAR,
+        firstname VARCHAR,
+        lastname VARCHAR,
+        PRIMARY KEY (id),
+        UNIQUE (username)
+    )
+''')
 
-transactions = Table(
-    "transactions",
-    metadata,
-    Column("id", Integer, primary_key=True),
-    Column("user_id", Integer, ForeignKey("users.id")),
-    Column("date", DATE),
-    Column("type", String),
-    Column("amount", Integer),
-    Column("category", String),
-    Column("notes", String)
-)
+transactions = text('''
+    CREATE TABLE transactions (
+        id INTEGER NOT NULL,
+        user_id INTEGER,
+        date DATE,
+        type VARCHAR,
+        amount INTEGER,
+        category VARCHAR,
+        notes VARCHAR,
+        PRIMARY KEY (id),
+        FOREIGN KEY(user_id) REFERENCES users (id)
+    )   
+''')
 
 
-
+# "python models.py" creates a database with above tables (it not exists already)
 if __name__=="__main__":
-    metadata.create_all(engine)
-    # metadata.drop_all(engine, [transactions])
+    with engine.begin() as conn:
+        conn.execute(users)
+        conn.execute(transactions)

@@ -2,9 +2,10 @@ from flask import Flask, request, render_template, \
     session, redirect, abort, make_response, jsonify
 from utility import logged_in, get_logger, notify
 from models import engine, users, transactions
-from sqlalchemy import select, insert, update, delete, func, desc, exc
+from sqlalchemy import select, insert, exc
 from datetime import datetime, date
 import json
+from sql import CRUD
 from collections import defaultdict
 
 
@@ -37,22 +38,13 @@ def deployment():
 def get_transaction():
     args = request.args
 
-    stmt = (
-        select(transactions)
-        .filter_by(user_id=session.get("user").get("id"))
-        .order_by(desc("date"))
-    )
     start, end, q = [args.get("start-date"), args.get("end-date"), args.get("search")]
 
-    if start:
-        stmt = stmt.where(transactions.c.date >= request.args['start-date'])
-    if end:
-        stmt = stmt.where(transactions.c.date <= request.args['end-date'])
-    if q:
-        stmt = stmt.where(transactions.c.notes.like(f"%{q}%"))
-
     with engine.begin() as conn:
-        result = conn.execute(stmt)
+        result = conn.execute(CRUD.searchTransaction(q, start, end), {
+            "user_id": session.get("user").get("id"), "filter":  f"%{q}%",
+            "end_date": end, "start_date": start
+        })
         mappings = {"transactions": [dict(x) for x in result.mappings().all()]}
         return json.dumps(mappings, default=str)
     
@@ -63,7 +55,7 @@ def post_transaction():
      with engine.begin() as conn:
         try:
             date = datetime.strptime(request.form.get('date'), "%Y-%m-%d").date()
-            conn.execute(insert(transactions), {
+            conn.execute(CRUD.addTransaction, {
                 **request.form, "date": date, "user_id": session['user']['id']
             })
             return notify({"status": "success", "text": "Added successfully!"}, 200)
@@ -75,14 +67,12 @@ def post_transaction():
 @app.patch("/api/transaction")
 @logged_in
 def update_transaction():
-    stmt = (
-        update(transactions).filter_by(
-            id=request.form.get("id"), user_id=session['user']['id']
-        ).values(request.form).values({"date": date.fromisoformat(request.form.get("date"))})
-    )
     try: 
         with engine.begin() as conn:
-            conn.execute(stmt)
+            conn.execute(CRUD.updateTransaction, {
+                **request.form, "date": date.fromisoformat(request.form.get("date")),
+                "id": request.form.get("id"), "user_id": session['user']['id']
+            })
             return notify({"status": "success", "text": "Updated successfully!"}, 200)
     except (exc.StatementError, ValueError):
         return notify({"status": "failed", "text": "Please check the input fields."})
@@ -95,7 +85,9 @@ def delete_transaction():
     user_id = session.get("user").get("id")
 
     with engine.begin() as conn:
-        conn.execute(delete(transactions).filter_by(id=transaction_id, user_id=user_id))
+        conn.execute(CRUD.deleteTransaction, {
+            "id": transaction_id, "user_id": user_id
+        })
         return notify() # default -> successful op
 
 
@@ -106,12 +98,7 @@ def report():
     with engine.begin() as conn:
 
         # monthly/daily report calculations
-        stmt = (
-            select(transactions.c["date", "type"], func.sum(transactions.c.amount).label("sum"))
-            .filter_by(user_id = session.get("user").get("id"))
-            .group_by("date", "type").order_by(desc("date"))
-        )
-        result = conn.execute(stmt)
+        result = conn.execute(CRUD.daily_report, {"user_id": session.get("user").get("id")})
 
         daily_report_dict = defaultdict(dict)
         for row in result:
@@ -124,12 +111,13 @@ def report():
 
         monthly_report_dict = defaultdict(lambda : dict(income=0, expense=0, investment=0))
         for day in daily_report:
-            month = day['date'].month
+            date_obj = date.fromisoformat(day['date'])
+            month = date_obj.month
             monthly_report_dict[month]['income'] += day.get("income", 0)
             monthly_report_dict[month]['expense'] += day.get('expense', 0)
             monthly_report_dict[month]['investment'] += day.get('investment', 0)
             monthly_report_dict[month].setdefault(
-                "month", day['date'].strftime("%B")
+                "month", date_obj.strftime("%B")
             )
         monthly_report_list = list(monthly_report_dict.values())
         monthly_report = list(map(
@@ -138,11 +126,7 @@ def report():
         ))
         
         # transaction categories calculation
-        stmt = (
-            select(transactions.c.category, func.count(transactions.c.category).label("count"))
-            .group_by("category").filter_by(user_id=session.get("user").get("id"))
-        )
-        result = conn.execute(stmt)
+        result = conn.execute(CRUD.category_report, {"user_id": session.get("user").get("id")})
         categories = []
         for row in result:
             categories.append({
@@ -175,9 +159,7 @@ def login():
     # manages post request
     data = request.form.get("username").lower(), request.form.get("password")
     with engine.begin() as conn:
-        current_user = conn.execute(
-            select(users).where(users.c.username == data[0], users.c.password == data[1])
-        ).first()
+        current_user = conn.execute(CRUD.login, {"username": data[0], "password": data[1]}).first()
         
         if not current_user:
             return "You haven't registered"
@@ -204,10 +186,8 @@ def register():
     if not data[0] or not data[1] or not data[2] or not data[3]:
         return "Please don't leave a field empty"
     
-    stmt = insert(users).values(**request.form).returning(users.c.id)
     with engine.begin() as conn:
-        result = conn.execute(stmt).fetchone()
-        logger.info(f"REGISTER ENDPOINT RESP: {result}")
+        result = conn.execute(CRUD.signup, request.form).fetchone()
         session["user"] = {"id": result.id ,"username": str(data[0])}
         return redirect("/")
     
