@@ -1,13 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
 
-  // Function to show or hide loader
-  function showLoader(show) {
-    const loader = document.getElementById("loader");
-    if (loader) loader.style.display = show ? "block" : "none";
-  }
-
-
   // Update Form
   function initializeUpdateForm() {
     const form = document.getElementById("updateTransactionForm");
@@ -19,8 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const formData = new FormData(form);
 
-      // Show loader
-      showLoader(true);
 
       fetch(url, {
         method: "PATCH",
@@ -28,13 +19,10 @@ document.addEventListener("DOMContentLoaded", () => {
       })
         .then((response) => response.json())
         .then((data) => {
-          // Hide loader
-          showLoader(false);
           showMessage(data, form)
         })
         .catch((error) => {
-          // Hide loader
-          showLoader(false);
+
           console.error("Error:", error);
           alert(
             "An error occurred while submitting the form. Please try again."
@@ -61,8 +49,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const params = new URLSearchParams(new FormData(form));
 
-      // Show loader
-      showLoader(true);
 
       fetch(url+"?"+params, {
         method: "DELETE"
@@ -70,12 +56,10 @@ document.addEventListener("DOMContentLoaded", () => {
         .then((response) => response.json())
         .then((data) => {
           // Hide loader
-          showLoader(false);
           showMessage(data, form)
         })
         .catch((error) => {
           // Hide loader
-          showLoader(false);
           console.error("Error:", error);
           alert(
             "An error occurred while submitting the form. Please try again."
@@ -119,8 +103,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const formData = new FormData(form);
 
-      // Show loader
-      showLoader(true);
 
       fetch(url, {
         method: "POST",
@@ -128,13 +110,11 @@ document.addEventListener("DOMContentLoaded", () => {
       })
         .then((response) => response.json())
         .then((data) => {
-          // Hide loader
-          showLoader(false);
+
           showMessage(data, form)
         })
         .catch((error) => {
-          // Hide loader
-          showLoader(false);
+
           console.error("Error:", error);
           alert(
             "An error occurred while submitting the form. Please try again."
@@ -159,8 +139,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(formData);
     const url = form.getAttribute("action")
 
-    // Show loader
-    showLoader(true);
 
     fetch(`${url}?${params}`) 
       .then((response) => response.json())
@@ -173,7 +151,8 @@ document.addEventListener("DOMContentLoaded", () => {
   window.exportData = function (format) {
     // Get table data
     const table = document.getElementById("transactionTable");
-    const rows = Array.from(table.querySelectorAll("tr")).map((tr) =>
+    const trArray = Array.from(table.querySelectorAll("tr"))
+    const rows = trArray.map((tr) =>
       Array.from(tr.querySelectorAll("th, td")).map((td) => td.innerText)
     );
 
