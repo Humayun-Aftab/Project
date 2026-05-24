@@ -1,3 +1,6 @@
+
+engine = create_engine("mysql+pymysql://admin:mudassar@expense-db.c1k8eg4w6m2u.eu-north-1.rds.amazonaws.com:3306/mysql")
+
 engine = create_engine("sqlite+pysqlite:///database.db")
 
 
