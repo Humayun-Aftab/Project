@@ -1,6 +1,3 @@
-from sqlalchemy import create_engine, text
-from sqlalchemy.dialects.sqlite import DATE
-
 engine = create_engine("sqlite+pysqlite:///database.db")
 
 
